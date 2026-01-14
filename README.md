@@ -103,7 +103,6 @@ checkterm/
 │   └── storage.py
 ├── data/
 └── README.md
-
 ```
 # Contributing
 
