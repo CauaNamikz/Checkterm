@@ -30,4 +30,4 @@ def run():
         elif commandline == "quit":
             break
         else:
-            print("Comando inválido. Digite 'help' para ver os comandos.")
+            print("Invalid command. Type 'help' to see commands.")
