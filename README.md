@@ -1,5 +1,5 @@
 # Checkterm
-Checkterm is a powerful and simple-to-use checklist CLI using Python that can evolve into a GUI eventually.
+Checkterm is a powerful, lightweight and simple-to-use checklist CLI using Python that can evolve into a GUI eventually.
 
 # Current Version
 `0.0.1.2026`
