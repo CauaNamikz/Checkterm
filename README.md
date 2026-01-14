@@ -66,7 +66,7 @@ Requirements:
 - Python 3.x
 
 ## For alpha versions
-1. Download the ZIP from github.com/Checkterm/Releases
+1. Download the .tar.gz file from github.com/Checkterm/Releases or the .zip file in the button "Code" from github.com/CauaNamikz/Checkterm 
 2. Extract it in any folder
 3. Open the root folder of the project in the terminal/command prompt (you can see the folders checkterm and data inside of them)
 4. Type "python3 -m checkterm"
