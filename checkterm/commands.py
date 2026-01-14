@@ -2,7 +2,7 @@
 
 from . import state
 
-OUTPUT_END = "Operação concluída com output"
+OUTPUT_END = "Task finished with output"
 OUTPUT_SUCCESS = 0
 OUTPUT_INVALID = 1
 
