@@ -22,7 +22,7 @@ def run():
             commands.list()
         elif c == "list-incomplete":
             commands.list_incomplete()
-        elif c == "list-complete":
+        elif c == "list-completed":
             commands.list_completed()
         elif c == "help":
             commands.help_command()

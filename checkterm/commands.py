@@ -28,6 +28,7 @@ OUTPUT_1_HELP = "1 - Error (invalid)"
 
 # Commands
 def list():
+    print("Entradas atuais:")
     for entry in state.entries:
         print("ID", entry["id"], "-", entry["name"])
 
@@ -48,37 +49,29 @@ def add_entry(): #Add entry
 
 
 def complete_entry(): #Complete entry
-    list
-    try:
-        id_ = int(input("ID for next completed entry > "))
-    except ValueError:
-        print(OUTPUT_END, OUTPUT_INVALID)
-        return
+    list()
+    id_ = int(input("ID for next completed entry > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
             entry["completed"] = 1
             print(OUTPUT_END, OUTPUT_SUCCESS)
             return
-
-    print(OUTPUT_END, OUTPUT_INVALID)
+        else:
+            print(OUTPUT_END, OUTPUT_INVALID)
 
 
 def remove_entry(): #Remove entry
-    list
-    try:
-        id_ = int(input("ID for next removed entry > "))
-    except ValueError:
-        print(OUTPUT_END, OUTPUT_INVALID)
-        return
+    list()
+    id_ = int(input("ID for next removed entry > "))
 
-    for i, entry in enumerate(state.entries):
+    for entry in state.entries:
         if entry["id"] == id_:
-            del state.entries[i]
+            state.entries.remove
             print(OUTPUT_END, OUTPUT_SUCCESS)
             return
-
-    print(OUTPUT_END, OUTPUT_INVALID)
+        else:
+            print(OUTPUT_END, OUTPUT_INVALID)
 
 
 def list_incomplete(): #List incomplete entries
@@ -86,6 +79,8 @@ def list_incomplete(): #List incomplete entries
     for entry in state.entries:
         if entry["completed"] == 0:
             print("ID", entry["id"], "-", entry["name"])
+        else:
+            print("No entries incomplete.")
 
 
 def list_completed(): #List complete entries
@@ -93,6 +88,8 @@ def list_completed(): #List complete entries
     for entry in state.entries:
         if entry["completed"] == 1:
             print("ID", entry["id"], "-", entry["name"])
+        else:
+            print("No entries completed.")
 
 
 def help_command(): #Help
