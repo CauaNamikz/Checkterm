@@ -9,9 +9,9 @@ Checkterm is a powerful, lightweight and simple-to-use checklist CLI using Pytho
 - Basic saving/loading system
 
 ## Roadmap
-- First internal refactor
+- First internal refactor (DONE!)
 - More languages
-- Entry descriptions
+- Entry descriptions and better entry management
 - Multiple checklists and checklist descriptions
 - User and group support
 - Pomodoro method integration
