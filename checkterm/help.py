@@ -1,8 +1,10 @@
 #Help texts
 
 #Commands
-add_entry = "add-entry - Add one entry and its description (optional)"
-add_description = "add-description - Add description to one existing entry"
+add_entry = "add-entry - Add one entry and its optional description"
+add_description = "add-description - Add/edit description of one existing entry"
+edit_entry_name = "edit-entry-name - Edit one entry's name"
+check_entry = "check-entry - See info of one entry"
 complete_entry = "complete-entry - Complete one entry"
 uncomplete_entry = "uncomplete-entry - Uncomplete one entry"
 remove_entry = "remove-entry - Remove one entry"
@@ -24,6 +26,8 @@ def run():
     print("Command list:")
     print(add_entry)
     print(add_description)
+    print(check_entry)
+    print(edit_entry_name)
     print(complete_entry)
     print(uncomplete_entry)
     print(remove_entry)
