@@ -55,6 +55,18 @@ def check_entry(): #List one entry's info
             (output.end, output.invalid)
 
 
+def edit_entry_name(): #Edit one entry's name
+    list()
+    id_ = input("ID of entry to be given a description > ")
+
+    for entry in state.entries:
+        if entry["id"] == id_:
+            entry["name"] = input("Name > ")
+            print(output.end, output.sucess)
+        else:
+            print(output.end, output.invalid)
+
+
 def complete_entry(): #Complete one entry
     list()
     id_ = int(input("ID of entry to be completed > "))

@@ -18,6 +18,8 @@ def run():
             commands.add_description()
         elif c == "check-entry":
             commands.check_entry()
+        elif c == "edit-entry-name":
+            commands.edit_entry_name()
         elif c == "complete-entry":
             commands.complete_entry()
         elif c == "uncomplete-entry":
