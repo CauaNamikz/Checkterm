@@ -32,7 +32,7 @@ def add_entry(): #Add one entry
 
 def add_description(): #Add description to existing entry
     list()
-    id_ = input("ID of entry to be given a description > ")
+    id_ = int(input("ID of entry to be given a description > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
@@ -44,7 +44,7 @@ def add_description(): #Add description to existing entry
 
 def check_entry(): #List one entry's info
     list()
-    id_ = input("ID of entry to be checked > ")
+    id_ = int(input("ID of entry to be checked > "))
     
     for entry in state.entries:
         if entry["id"] == id_:
@@ -57,7 +57,7 @@ def check_entry(): #List one entry's info
 
 def edit_entry_name(): #Edit one entry's name
     list()
-    id_ = input("ID of entry to be given a description > ")
+    id_ = int(input("ID of entry to be given a description > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
