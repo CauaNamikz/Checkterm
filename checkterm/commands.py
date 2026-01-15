@@ -1,77 +1,97 @@
 #Base of commands for CLI
 
 #Import from state.py
-from . import state
-
-
-#Output
-OUTPUT_END = "Task finished with output"
-OUTPUT_SUCCESS = 0
-OUTPUT_INVALID = 1
-
-
-# Help texts
-#Commands
-ADD_ENTRY_HELP = "add-entry - Add entries "
-COMPLETE_ENTRY_HELP = "complete-entry - Complete entries"
-REMOVE_ENTRY_HELP = "remove-entry - Remove entries"
-SAVE_HELP = "save - Save checklist"
-LOAD_HELP = "load - Load checklist"
-LIST_HELP = "list - List entries"
-LIST_INCOMPLETE_HELP = "list-incomplete - List incomplete entries"
-LIST_COMPLETED_HELP = "list-completed - List completed entries"
-QUIT_HELP = "quit - Quit the program"
-#Outputs
-OUTPUT_0_HELP = "0 - Sucess"
-OUTPUT_1_HELP = "1 - Error (invalid)"
+from . import state, output
 
 
 # Commands
-def list():
+def list(): #List current entries
     print("Entradas atuais:")
     for entry in state.entries:
         print("ID", entry["id"], "-", entry["name"])
 
-def add_entry(): #Add entry
+
+def add_entry(): #Add one entry
     name = input("Entry name > ")
 
     if name.strip() == "":
-        print(OUTPUT_END, OUTPUT_INVALID)
+        print(output.end, output.invalid)
         return
+    
+    desc = input("Entry description (optional) > ")
 
     state.entries.append({
         "id": state.get_next_id(),
         "name": name,
+        "description": desc,
         "completed": 0
     })
 
-    print(OUTPUT_END, OUTPUT_SUCCESS)
+    print(output.end, output.sucess)
 
 
-def complete_entry(): #Complete entry
+def add_description(): #Add description to existing entry
     list()
-    id_ = int(input("ID for next completed entry > "))
+    id_ = input("ID of entry to be given a description > ")
+
+    for entry in state.entries:
+        if entry["id"] == id_:
+            entry["description"] = input("Description > ")
+            print(output.end, output.sucess)
+        else:
+            print(output.end, output.invalid)
+
+
+def check_entry(): #List one entry's info
+    list()
+    id_ = input("ID of entry to be checked > ")
+    
+    for entry in state.entries:
+        if entry["id"] == id_:
+            print(entry["name"])
+            print("ID", entry["id"])
+            print(entry["description"])
+        else:
+            (output.end, output.invalid)
+
+
+def complete_entry(): #Complete one entry
+    list()
+    id_ = int(input("ID of entry to be completed > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
             entry["completed"] = 1
-            print(OUTPUT_END, OUTPUT_SUCCESS)
+            print(output.end, output.invalid)
             return
         else:
-            print(OUTPUT_END, OUTPUT_INVALID)
+            print(output.end, output.invalid)
 
 
-def remove_entry(): #Remove entry
+def uncomplete_entry(): #Uncomplete one entry
     list()
-    id_ = int(input("ID for next removed entry > "))
+    id_ = int(input("ID of entry to be uncompleted > "))
+
+    for entry in state.entries:
+        if entry["id"] == id_:
+            entry["completed"] = 0
+            print(output.end, output.sucess)
+            return
+        else:
+            print(output.end, output.invalid)
+
+
+def remove_entry(): #Remove one entry
+    list()
+    id_ = int(input("ID of entry to be removed > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
             state.entries.remove
-            print(OUTPUT_END, OUTPUT_SUCCESS)
+            print(output.end, output.sucess)
             return
         else:
-            print(OUTPUT_END, OUTPUT_INVALID)
+            print(output.end, output.invalid)
 
 
 def list_incomplete(): #List incomplete entries
@@ -90,20 +110,3 @@ def list_completed(): #List complete entries
             print("ID", entry["id"], "-", entry["name"])
         else:
             print("No entries completed.")
-
-
-def help_command(): #Help
-    print("Command list:")
-    print(ADD_ENTRY_HELP)
-    print(COMPLETE_ENTRY_HELP)
-    print(REMOVE_ENTRY_HELP)
-    print(LIST_HELP)
-    print(LIST_INCOMPLETE_HELP)
-    print(LIST_COMPLETED_HELP)
-    print(SAVE_HELP)
-    print(LOAD_HELP)
-    print(QUIT_HELP)
-    print()
-    print("Output list:")
-    print(OUTPUT_0_HELP)
-    print(OUTPUT_1_HELP)
