@@ -2,16 +2,16 @@
 Checkterm is a powerful, lightweight and simple-to-use checklist CLI using Python that can evolve into a GUI eventually.
 
 # Current Version
-`0.0.1.2026`
+`0.0.2.2026`
 
 # Functions
-- Adding, removing and completing entries (filtering them by ID, name, completed [active = 0, state 1] or not [active = 1, state = 0])
+- Adding, removing and completing entries
 - Basic saving/loading system
 
 ## Roadmap
-- First internal refactor (DONE!)
+- First internal refactor **(DONE)**
 - More languages
-- Entry descriptions and better entry management
+- Entry descriptions and better entry management **(DONE)**
 - Multiple checklists and checklist descriptions
 - User and group support
 - Pomodoro method integration
@@ -78,27 +78,35 @@ Done! You've initiated Checkterm.
 Once running, type `help` to see all available commands, their usage and outputs.
 
 Main commands:
-- `add-entry` (Add an entry)
-- `complete-entry` (Complete an entry)
-- `remove-entry` (Remove an entry)
-- `list-active` (See list of active entries)
-- `list-state-0` (See list of incomplete entries)
-- `list-state-1` (See list of complete entries)
-- `save` (Save checklist to data folder)
-- `load` (Load checklist from data folder)
-- `quit` (Quit program)
+- `add-entry` (Add one entry and its optional description)
+- `add-description` (Add/edit description of one existing entry)
+- `check-entry`(See info of one entry)
+- `edit-entry-name` (Edit one entry's name)
+- `complete-entry` (Complete one entry)
+- `uncomplete-entry` (Uncomplete one entry)
+- `remove-entry` (Remove one entry)
+- `list` (List all entries)
+- `list-incomplete` (List incomplete entries)
+- `list-complete` (List complete entries)
+- `save` (Save checklist)
+- `load` (Load checklist)
+- `quit` (Quit the program)
 
 Outputs:
 - `0` (Success)
-- `1` (Error [Invalid])
+- `1` (Error [invalid])
 
 # Project Structure
 
 ```text
 checkterm/
 ├── checkterm/
+│   ├── __init__.py
+│   ├── __main__.py
 │   ├── cli.py
 │   ├── commands.py
+│   ├── help.py
+│   ├── output.py
 │   ├── state.py
 │   └── storage.py
 ├── data/
