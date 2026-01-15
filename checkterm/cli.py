@@ -1,33 +1,42 @@
-from . import commands, storage
+#Import from commands.py and storage.pys
+from . import commands, storage, help
 
-ver = "Checkterm v0.0.1.2026 / ENG package / ALPHA package"
+#Version number
+ver = "Checkterm v0.0.2.2026 / ENG package / ALPHA package"
 
+#Start Text
 def run():
     print(ver)
     print("Type 'help' for commands and outputs")
-
+#while Loop for command line
     while True:
-        commandline = input("> ")
+        c = input("> ") #Command line input
 
-        if commandline == "add-entry":
+        if c == "add-entry": 
             commands.add_entry()
-        elif commandline == "complete-entry":
+        elif c == "add-description":
+            commands.add_description()
+        elif c == "check-entry":
+            commands.check_entry()
+        elif c == "complete-entry":
             commands.complete_entry()
-        elif commandline == "remove-entry":
+        elif c == "uncomplete-entry":
+            commands.uncomplete_entry()
+        elif c == "remove-entry":
             commands.remove_entry()
-        elif commandline == "list-active":
-            commands.list_active()
-        elif commandline == "list-state-0":
-            commands.list_state_0()
-        elif commandline == "list-state-1":
-            commands.list_state_1()
-        elif commandline == "help":
-            commands.help_command()
-        elif commandline == "save":
+        elif c == "list":
+            commands.list()
+        elif c == "list-incomplete":
+            commands.list_incomplete()
+        elif c == "list-completed":
+            commands.list_completed()
+        elif c == "help":
+            help.run()
+        elif c == "save":
             storage.save()
-        elif commandline == "load":
+        elif c == "load":
             storage.load()
-        elif commandline == "quit":
+        elif c == "quit":
             break
         else:
             print("Invalid command. Type 'help' to see commands.")

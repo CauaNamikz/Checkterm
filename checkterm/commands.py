@@ -1,110 +1,112 @@
 #Base of commands for CLI
 
-from . import state
-
-OUTPUT_END = "Task finished with output"
-OUTPUT_SUCCESS = 0
-OUTPUT_INVALID = 1
-
-
-# Help texts
-ADD_ENTRY_HELP = "add-entry - Add entries "
-COMPLETE_ENTRY_HELP = "complete-entry - Complete entries"
-REMOVE_ENTRY_HELP = "remove-entry - Remove entries"
-SAVE_HELP = "save - Save checklist"
-LOAD_HELP = "load - Load checklist"
-LIST_ACTIVE_HELP = "list-active - See list of active entries"
-LIST_STATE_0_HELP = "list-state-0 - See list of incomplete entries"
-LIST_STATE_1_HELP = "list-state-1 - See list of completed entries"
-QUIT_HELP = "quit - Quit the program"
-
-OUTPUT_0_HELP = "0 - sucess"
-OUTPUT_1_HELP = "1 - error (invalid)"
+#Import from state.py
+from . import state, output
 
 
 # Commands
-def add_entry():
-    name = input("Entry name > ")
-
-    if name.strip() == "":
-        print(OUTPUT_END, OUTPUT_INVALID)
-        return
-
-    state.entries.append({
-        "id": state.get_next_id(),
-        "name": name,
-        "active": 1,
-        "state": 0
-    })
-
-    print(OUTPUT_END, OUTPUT_SUCCESS)
-
-
-def complete_entry():
-    try:
-        id_ = int(input("ID for next completed entry (get with list-active) > "))
-    except ValueError:
-        print(OUTPUT_END, OUTPUT_INVALID)
-        return
-
-    for entry in state.entries:
-        if entry["id"] == id_:
-            entry["state"] = 1
-            entry["active"] = 0
-            print(OUTPUT_END, OUTPUT_SUCCESS)
-            return
-
-    print(OUTPUT_END, OUTPUT_INVALID)
-
-
-def remove_entry():
-    try:
-        id_ = int(input("ID for next removed entry (get with list-active) > "))
-    except ValueError:
-        print(OUTPUT_END, OUTPUT_INVALID)
-        return
-
-    for i, entry in enumerate(state.entries):
-        if entry["id"] == id_:
-            del state.entries[i]
-            print(OUTPUT_END, OUTPUT_SUCCESS)
-            return
-
-    print(OUTPUT_END, OUTPUT_INVALID)
-
-
-def list_active():
-    print("Active entries:")
+def list(): #List current entries
+    print("Entradas atuais:")
     for entry in state.entries:
         print("ID", entry["id"], "-", entry["name"])
 
 
-def list_state_0():
+def add_entry(): #Add one entry
+    name = input("Entry name > ")
+
+    if name.strip() == "":
+        print(output.end, output.invalid)
+        return
+    
+    desc = input("Entry description (optional) > ")
+
+    state.entries.append({
+        "id": state.get_next_id(),
+        "name": name,
+        "description": desc,
+        "completed": 0
+    })
+
+    print(output.end, output.sucess)
+
+
+def add_description(): #Add description to existing entry
+    list()
+    id_ = input("ID of entry to be given a description > ")
+
+    for entry in state.entries:
+        if entry["id"] == id_:
+            entry["description"] = input("Description > ")
+            print(output.end, output.sucess)
+        else:
+            print(output.end, output.invalid)
+
+
+def check_entry(): #List one entry's info
+    list()
+    id_ = input("ID of entry to be checked > ")
+    
+    for entry in state.entries:
+        if entry["id"] == id_:
+            print(entry["name"])
+            print("ID", entry["id"])
+            print(entry["description"])
+        else:
+            (output.end, output.invalid)
+
+
+def complete_entry(): #Complete one entry
+    list()
+    id_ = int(input("ID of entry to be completed > "))
+
+    for entry in state.entries:
+        if entry["id"] == id_:
+            entry["completed"] = 1
+            print(output.end, output.invalid)
+            return
+        else:
+            print(output.end, output.invalid)
+
+
+def uncomplete_entry(): #Uncomplete one entry
+    list()
+    id_ = int(input("ID of entry to be uncompleted > "))
+
+    for entry in state.entries:
+        if entry["id"] == id_:
+            entry["completed"] = 0
+            print(output.end, output.sucess)
+            return
+        else:
+            print(output.end, output.invalid)
+
+
+def remove_entry(): #Remove one entry
+    list()
+    id_ = int(input("ID of entry to be removed > "))
+
+    for entry in state.entries:
+        if entry["id"] == id_:
+            state.entries.remove
+            print(output.end, output.sucess)
+            return
+        else:
+            print(output.end, output.invalid)
+
+
+def list_incomplete(): #List incomplete entries
     print("Incomplete entries:")
     for entry in state.entries:
-        if entry["state"] == 0:
+        if entry["completed"] == 0:
             print("ID", entry["id"], "-", entry["name"])
+        else:
+            print("No entries incomplete.")
 
 
-def list_state_1():
+def list_completed(): #List complete entries
     print("Complete entries:")
     for entry in state.entries:
-        if entry["state"] == 1:
+        if entry["completed"] == 1:
             print("ID", entry["id"], "-", entry["name"])
-
-
-def help_command():
-    print("Command list:")
-    print(ADD_ENTRY_HELP)
-    print(COMPLETE_ENTRY_HELP)
-    print(REMOVE_ENTRY_HELP)
-    print(LIST_ACTIVE_HELP)
-    print(LIST_STATE_0_HELP)
-    print(LIST_STATE_1_HELP)
-    print(SAVE_HELP)
-    print(LOAD_HELP)
-    print(QUIT_HELP)
-    print()
-    print("Output list:")
-    print(OUTPUT_0_HELP)
-    print(OUTPUT_1_HELP)
+        else:
+            print("No entries completed.")
