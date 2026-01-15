@@ -110,6 +110,7 @@ checkterm/
 │   ├── state.py
 │   └── storage.py
 ├── data/
+│   ├── entries.json
 └── README.md
 ```
 # Contributing
