@@ -23,7 +23,7 @@ Checkterm is a powerful, lightweight and simple-to-use checklist CLI using Pytho
 - Possible rewrite in a more performant / smoother programming language (new branch)
 - Eventual GUI rewrite, redesign and purpose rework (separate repository)
 
-Note: even if Checkterm receives an official GUI version, the CLI will continue to be maintained as a stable base for other checklist-related projects for anyone.
+Note: even if Checkterm receives an official GUI version, the CLI will continue to be maintained as a stable base for other checklist-related projects for anyone, and will become a template project.
 
 # Version structure
 Checkterm uses a custom versioning format. Example:
