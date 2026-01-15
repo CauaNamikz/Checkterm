@@ -8,6 +8,7 @@ from . import state, output
 def list(): #List current entries
     print("Entradas atuais:")
     for entry in state.entries:
+        print()
         print("ID", entry["id"], "-", entry["name"])
 
 
@@ -32,7 +33,7 @@ def add_entry(): #Add one entry
 
 def add_description(): #Add description to existing entry
     list()
-    id_ = input("ID of entry to be given a description > ")
+    id_ = int(input("ID of entry to be given a description > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
@@ -43,21 +44,22 @@ def add_description(): #Add description to existing entry
 
 
 def check_entry(): #List one entry's info
-    list()
-    id_ = input("ID of entry to be checked > ")
+    id_ = int(input("ID of entry to be checked > "))
     
     for entry in state.entries:
         if entry["id"] == id_:
+            print()
             print(entry["name"])
             print("ID", entry["id"])
             print(entry["description"])
+            print()
         else:
             (output.end, output.invalid)
 
 
 def edit_entry_name(): #Edit one entry's name
     list()
-    id_ = input("ID of entry to be given a description > ")
+    id_ = int(input("ID of entry to be given a description > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
@@ -110,6 +112,7 @@ def list_incomplete(): #List incomplete entries
     print("Incomplete entries:")
     for entry in state.entries:
         if entry["completed"] == 0:
+            print()
             print("ID", entry["id"], "-", entry["name"])
         else:
             print("No entries incomplete.")
@@ -119,6 +122,7 @@ def list_completed(): #List complete entries
     print("Complete entries:")
     for entry in state.entries:
         if entry["completed"] == 1:
+            print()
             print("ID", entry["id"], "-", entry["name"])
         else:
             print("No entries completed.")
