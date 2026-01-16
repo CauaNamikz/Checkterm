@@ -1,5 +1,6 @@
 #Base of commands for CLI
 
+
 #Import from state.py
 from . import state, output
 
@@ -12,28 +13,88 @@ def list(): #List current entries
         print("ID", entry["id"], "-", entry["name"])
 
 
-def add_entry(): #Add one entry
-    name = input("Entry name > ")
+def list_checklists(): #List current checklists
+    for checklist in state.checklists:
+        print("ID", checklist["id"], "-", checklist["name"])
 
-    if name.strip() == "":
+
+def add_checklist(): #Add one checklist
+    state.checklistname = input("Create checklist name > ")
+
+    if state.checklistname.strip == "":
         print(output.end, output.invalid)
         return
-    
-    desc = input("Entry description (optional) > ")
-
-    state.entries.append({
-        "id": state.get_next_id(),
-        "name": name,
-        "description": desc,
-        "completed": 0
-    })
-
-    print(output.end, output.sucess)
+    else:
+        state.checklistdesc = input("Create checklist description (optional) > ")
+        state.checklists.append({
+            "id": state.get_next_id_checklist(),
+            "name": state.checklistname,
+            "description": state.checklistdesc
+        })
+        print(output.end, output.sucess)
 
 
-def add_description(): #Add description to existing entry
+def add_entry(): #Add one entry
+    if state.checklistname != 1:
+        checklist_id = int(input("Assign this entry to checklist ID > "))
+        name = input("Entry name > ")
+        if name.strip() == "":
+            print(output.end, output.invalid)
+            return
+        else:
+            desc = input("Entry description (optional) > ")
+
+            state.entries.append({
+                "id": state.get_next_id(),
+                "name": name,
+                "description": desc,
+                "completed": False,
+                "checklist": {
+                    "id": checklist_id,
+                    "name": state.checklistname,
+                    "description": state.checklistdesc
+                } 
+            })
+
+            print(output.end, output.sucess)
+    else:
+        print("You have to create a checklist.")
+        print(output.end, output.invalid)
+
+
+def edit_checklist_name():
+    list_checklists()
+    id_c = int(input("ID of checklist to have name edited > "))
+
+    for checklist in state.checklists:
+        if checklist["id"] == id_c:
+            name_c = input("Name > ")
+            checklist["name"] = name_c
+            for info in state.entries:
+                info["checklist"]["name"] = name_c
+            print(output.end, output.sucess)
+        else:
+            print(output.end, output.invalid)
+
+
+def edit_checklist_description():
+    list_checklists()
+    id_c = int(input("ID of checklist to have description edited > "))
+
+    for checklist in state.checklists:
+        if checklist["id"] == id_c:
+            name_c = input("Description > ")
+            checklist["description"]
+            for info in state.entries:
+                info["checklist"]["description"]
+            print(output.end, output.sucess)
+        else:
+            print(output.end, output.invalid)
+
+
+def edit_entry_description(): #Add/edit description to existing entry
     list()
-    id_ = int(input("ID of entry to be given a description > "))
+    id_ = int(input("ID of entry to have description edited/added > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
@@ -48,18 +109,29 @@ def check_entry(): #List one entry's info
     
     for entry in state.entries:
         if entry["id"] == id_:
-            print()
-            print(entry["name"])
             print("ID", entry["id"])
+            print(entry["name"])
             print(entry["description"])
-            print()
+            print("Completed:", entry["completed"])
+        else:
+            (output.end, output.invalid)
+
+
+def check_checklist(): #List one checklist's info 
+    id_c = int(input("ID of checklist to be checked > "))
+    for entry in state.entries:
+        if entry["id"] == id_c:
+            print("ID", entry["id"])
+            print(entry["name"])
+            print(entry["description"])
+            print("Completed:", entry["completed"])
         else:
             (output.end, output.invalid)
 
 
 def edit_entry_name(): #Edit one entry's name
     list()
-    id_ = int(input("ID of entry to be given a description > "))
+    id_ = int(input("ID of entry to have name edited > "))
 
     for entry in state.entries:
         if entry["id"] == id_:
@@ -75,7 +147,7 @@ def complete_entry(): #Complete one entry
 
     for entry in state.entries:
         if entry["id"] == id_:
-            entry["completed"] = 1
+            entry["completed"] = True
             print(output.end, output.invalid)
             return
         else:
@@ -88,7 +160,7 @@ def uncomplete_entry(): #Uncomplete one entry
 
     for entry in state.entries:
         if entry["id"] == id_:
-            entry["completed"] = 0
+            entry["completed"] = False
             print(output.end, output.sucess)
             return
         else:
@@ -111,8 +183,7 @@ def remove_entry(): #Remove one entry
 def list_incomplete(): #List incomplete entries
     print("Incomplete entries:")
     for entry in state.entries:
-        if entry["completed"] == 0:
-            print()
+        if entry["completed"] == False:
             print("ID", entry["id"], "-", entry["name"])
         else:
             print("No entries incomplete.")
@@ -121,8 +192,20 @@ def list_incomplete(): #List incomplete entries
 def list_completed(): #List complete entries
     print("Complete entries:")
     for entry in state.entries:
-        if entry["completed"] == 1:
-            print()
+        if entry["completed"] == True:
             print("ID", entry["id"], "-", entry["name"])
         else:
             print("No entries completed.")
+
+
+def list_checklist_entries(): #List all entries of one checklist
+    id_c = input("ID of checklist to have all its entries listed > ")
+
+    for entry in state.entries:
+        if entry["checklist"]["id"] == id_c:
+            print("Checklist", entry["checklist"]["name"])
+            print()
+            print("ID", entry["id"])
+            print(entry["name"])
+            print(entry["description"])
+            print("Completed:", entry["completed"])

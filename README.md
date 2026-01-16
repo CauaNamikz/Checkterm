@@ -73,6 +73,8 @@ Requirements:
 
 Done! You've initiated Checkterm.
 
+Note: You need to do steps 3 and 4 every time you want to initiate Checkterm.
+
 # Usage
 
 Once running, type `help` to see all available commands, their usage and outputs.
@@ -110,6 +112,7 @@ checkterm/
 │   ├── state.py
 │   └── storage.py
 ├── data/
+│   ├── entries.json
 └── README.md
 ```
 # Contributing
@@ -121,7 +124,7 @@ Follow the existing code/version structure (unless refactor is needed) and namin
 
 # Author
 
-Created and maintained by cauanamikz in 14/01/2026.
+Created by CauaNamikz in 14/01/2026 and maintained by the latter.
 
 # License
 
