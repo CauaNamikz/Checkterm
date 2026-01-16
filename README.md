@@ -44,7 +44,8 @@ Notes:
 
 ## Alpha versions
 If both the major and minor version numbers are **0**, the release is considered an **ALPHA version**.
-In alpha versions (before 0.4.0.2026):
+
+In alpha versions (before 0.4.0.2026, overhauled and fixed):
 - The **minor version identifier** acts as the major progression indicator.
 - The **patch version identifier** acts as the minor progression indicator.
 
@@ -56,12 +57,14 @@ This phase allows rapid iteration without long-term stability guarantees.
 
 ## Beta versions
 If the major version number is **0** and the minor version number is **greater than or equal to 5**, the release is considered a **BETA version**.
+
 In beta versions:
 - The **minor version identifier** represents major feature milestones.
 - The **patch version identifier** represents smaller improvements and fixes.
 
 ## LTS version
 If the major version number is **greater than or equal to 1**, the release is considered **LTS**.
+
 In LTS versions:
 - LTS versions follow the standard version structure and aim to maintain backwards compatibility whenever possible.
 
@@ -85,14 +88,19 @@ Note: You need to do steps 3 and 4 every time you want to initiate Checkterm.
 Once running, type `help` to see all available commands, their usage and outputs.
 
 Main commands:
+- `add-checklist`(Add one checklist and its optional description)
 - `add-entry` (Add one entry and its optional description)
-- `add-description` (Add/edit description of one existing entry)
+- `edit-checklist-description` (Add/edit description of one existing checklist)
+- `edit-entry-description` (Add/edit description of one existing entry)
+- `check-checklist` (See info of one checklist)
 - `check-entry`(See info of one entry)
 - `edit-entry-name` (Edit one entry's name)
 - `complete-entry` (Complete one entry)
 - `uncomplete-entry` (Uncomplete one entry)
 - `remove-entry` (Remove one entry)
 - `list` (List all entries)
+- `list-checklists` (List all checklists)
+- 
 - `list-incomplete` (List incomplete entries)
 - `list-complete` (List complete entries)
 - `save` (Save checklist)
@@ -118,6 +126,7 @@ checkterm/
 │   └── storage.py
 ├── data/
 │   ├── entries.json
+├── LICENSE
 └── README.md
 ```
 # Contributing
