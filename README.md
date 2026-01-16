@@ -2,17 +2,18 @@
 Checkterm is a powerful, lightweight and simple-to-use checklist CLI using Python that can evolve into a GUI eventually.
 
 # Current Version
-`0.0.2.2026`
+`0.4.0.2026`
 
 # Functions
-- Adding, removing and completing entries
+- Adding, and editing checklists (Removing to be added in 0.5.0.2026)
+- Adding, editing, removing and completing entries
 - Basic saving/loading system
 
 ## Roadmap
 - First internal refactor **(DONE)**
 - More languages
 - Entry descriptions and better entry management **(DONE)**
-- Multiple checklists and checklist descriptions
+- Multiple checklists support **(DONE)**
 - User and group support
 - Pomodoro method integration
 - Second internal refactor (new branch)
@@ -43,9 +44,13 @@ Notes:
 
 ## Alpha versions
 If both the major and minor version numbers are **0**, the release is considered an **ALPHA version**.
-In alpha versions:
+In alpha versions (before 0.4.0.2026):
 - The **minor version identifier** acts as the major progression indicator.
 - The **patch version identifier** acts as the minor progression indicator.
+
+In alpha versions (after 0.4.0.2026):
+- The **minor version identifier** acts as the major progression indicator.
+- The **patch version identifier** acts as the patch progression indicator.
 
 This phase allows rapid iteration without long-term stability guarantees.
 
