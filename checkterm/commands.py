@@ -9,6 +9,7 @@ from . import state, output
 def list(): #List current entries
     print("Entradas atuais:")
     for entry in state.entries:
+        print()
         print("ID", entry["id"], "-", entry["name"])
 
 
